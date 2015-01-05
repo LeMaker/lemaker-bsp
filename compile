@@ -1,12 +1,15 @@
 #!/bin/sh
 
-CROSS_COMPILE=arm-linux-gnueabihf-
-CC=arm-linux-gnueabihf-gcc
+PATH=`pwd`/../arm-bpi-linux-gnueabihf/bin:$PATH
+CROSS_COMPILE=arm-bpi-linux-gnueabihf-
+CC=${CROSS_COMPILE}gcc
 ccache -V &> /dev/null
 if [ $? -eq 0 ]; then 
 	CC="ccache ${CC}"
 fi
 
-make clean
-./configure BananaPi
-make CROSS_COMPILE="${CROSS_COMPILE}" CC="${CC}"
+if [ ! -e chosen_board.mk ]; then
+	make clean
+	./configure BananaPi
+fi
+make CROSS_COMPILE="${CROSS_COMPILE}" CC="${CC}" linux-config
