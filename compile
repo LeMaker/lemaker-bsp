@@ -3,13 +3,15 @@
 PATH=`pwd`/../arm-bpi-linux-gnueabihf/bin:$PATH
 CROSS_COMPILE=arm-bpi-linux-gnueabihf-
 CC=${CROSS_COMPILE}gcc
+CXX=${CROSS_COMPILE}g++
 ccache -V &> /dev/null
 if [ $? -eq 0 ]; then 
 	CC="ccache ${CC}"
+	CXX="ccache ${CXX}"
 fi
 
 if [ ! -e chosen_board.mk ]; then
 	make clean
 	./configure BananaPi
 fi
-make CROSS_COMPILE="${CROSS_COMPILE}" CC="${CC}" linux-config
+make CROSS_COMPILE="${CROSS_COMPILE}" CC="${CC}" CXX="${CXX}" $*
