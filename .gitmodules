@@ -7,12 +7,12 @@
 [submodule "sunxi-boards"]
 	path = sunxi-boards
 	url = ../sunxi-boards.git
-[submodule "linux-sunxi"]
-	path = linux-sunxi
-	url = ../linux-sunxi.git
 [submodule "allwinner-tools"]
 	path = allwinner-tools
 	url = ../allwinner-tools.git
 [submodule "cedarx-libs"]
 	path = cedarx-libs
 	url = ../cedarx-libs.git
+[submodule "linux-sunxi"]
+	path = linux-sunxi
+	url = git@github.com:forumi0721/linux-sunxi.git
