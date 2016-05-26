@@ -3,7 +3,7 @@
 .PHONY: linux-config livesuit android
 
 SUDO=sudo
-CROSS_COMPILE=arm-linux-gnueabihf-
+CROSS_COMPILE?=arm-linux-gnueabihf-
 OUTPUT_DIR=$(CURDIR)/output
 BUILD_PATH=$(CURDIR)/build
 ROOTFS?=norootfs
