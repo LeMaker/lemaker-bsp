@@ -3,13 +3,19 @@
 .PHONY: linux-config livesuit android
 
 SUDO=sudo
-CROSS_COMPILE=arm-linux-gnueabihf-
+CROSS_COMPILE?=arm-linux-gnueabihf-
 OUTPUT_DIR=$(CURDIR)/output
 BUILD_PATH=$(CURDIR)/build
 ROOTFS?=norootfs
 ROOTFS_BASENAME=$(basename $(basename $(ROOTFS)))
 Q=
-J=$(shell expr `grep ^processor /proc/cpuinfo  | wc -l` \* 2)
+J=1
+OS := $(shell uname -s)
+ifeq ($(OS), Darwin)
+	J=$(shell sysctl -a | grep machdep.cpu.thread_count: | sed 's/machdep.cpu.thread_count: //g')
+else
+	J=$(shell expr `grep ^processor /proc/cpuinfo  | wc -l` \* 2)
+endif
 
 include chosen_board.mk
 
